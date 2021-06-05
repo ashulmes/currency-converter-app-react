@@ -1,0 +1,24 @@
+.App {
+  width: 600px;
+  margin: 20px auto;
+  padding: 30px;
+  border: 2px solid #f5f5f5;
+  border-radius: 10px;
+}
+
+.ConvertButton {
+  width: 540px;
+  border-radius: 30px;
+  padding: 8px 0;
+  border: none;
+  color: #ffffff;
+  background-color: #046ab8;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
+}
+
+.CurrencyInput {
+  border: 0px;
+  border-bottom: 1px solid #046ab8;
+  width: 540px;
+  padding: 10px 0px;
+}
