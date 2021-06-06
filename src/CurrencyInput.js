@@ -5,7 +5,7 @@ import CurrencySelect from "./CurrencySelect";
 export default function CurrencyInput() {
   function handleSubmit(event) {
     event.preventDefault();
-    alert("Converting...");
+    alert(`Converting...`);
   }
 
   return (
@@ -19,31 +19,18 @@ export default function CurrencyInput() {
           autoComplete="off"
           autoFocus="off"
           placeholder="100"
+          required
         />
       </label>
       <br />
-      <label>
+      <label className="Currency">
         Select a currency to convert <strong>from</strong>:
-        <select>
-          <option selected value="GBP">
-            GBP
-          </option>
-          <option value="EUR">EUR</option>
-          <option value="USD">USD</option>
-          <option value="KUN">KUN</option>
-        </select>
+        <CurrencySelect />
       </label>
       <br />
-      <label>
+      <label className="Currency">
         Select a currency to convert <strong>to</strong>:
-        <select>
-          <option selected value="GBP">
-            GBP
-          </option>
-          <option value="EUR">EUR</option>
-          <option value="USD">USD</option>
-          <option value="KUN">KUN</option>
-        </select>
+        <CurrencySelect />
       </label>
       <input type="submit" value="Convert" className="ConvertButton" />
     </form>
