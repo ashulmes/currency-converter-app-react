@@ -2,12 +2,12 @@ import React from "react";
 import "./App.css";
 
 export default function CurrencySelect(props) {
-  let { countries } = props;
+  let { currencies, chosenCurrency, onChangeCurrency } = props;
 
   return (
     <span className="Dropdown">
-      <select>
-        {countries.map((options) => (
+      <select value={chosenCurrency} onChange={onChangeCurrency}>
+        {currencies.map((options) => (
           <option value={options} key={options}>
             {options}
           </option>

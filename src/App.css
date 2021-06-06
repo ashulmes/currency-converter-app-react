@@ -4,7 +4,7 @@ select {
 }
 
 .App {
-  max-width: 40%;
+  max-width: 30%;
   margin: 20px auto;
   font-size: 14px;
   padding: 30px;
@@ -14,14 +14,20 @@ select {
 }
 
 .ConvertButton {
-  width: 540px;
+  width: 400px;
   border-radius: 30px;
   padding: 8px 0;
-  margin-top: 40px;
+  display: block;
+  margin: 0 auto;
+  margin-top: 30px;
   border: none;
   color: #ffffff;
   background-color: #046ab8;
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
+  transition: all 200ms ease-in-out;
+}
+
+.ConvertButton:hover {
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
 }
 
 .Currency {
@@ -31,13 +37,23 @@ select {
 .CurrencyInput {
   border: 0px;
   border-bottom: 1px solid #046ab8;
-  width: 540px;
+  width: 400px;
   padding: 10px 0px;
   margin-bottom: 10px;
 }
 
+.CurrencySelectors {
+  text-align: center;
+}
+
 .Dropdown {
   margin-left: 10px;
+}
+
+.Output {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 22px;
 }
 
 .Switch {

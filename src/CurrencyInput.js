@@ -4,24 +4,47 @@ import "./App.css";
 import CurrencySelect from "./CurrencySelect";
 
 export default function CurrencyInput() {
-  let [countries, setCountries] = useState([]);
+  let [currencies, setCurrencies] = useState([]);
+  let [fromCurrency, setFromCurrency] = useState();
+  let [toCurrency, setToCurrency] = useState();
+  let [amount, setAmount] = useState(0);
+  let [fromCurrencyAmount, setFromCurrencyAmount] = useState(true);
+  let [exchangeRate, setExchangeRate] = useState();
 
   useEffect(() => {
-    axios({
-      method: "GET",
-      url: `https://openexchangerates.org/api/currencies.json`,
-    }).then((response) => {
-      setCountries(Object.entries(response.data));
-    });
+    axios
+      .get(
+        `https://v6.exchangerate-api.com/v6/3ceed1dda48fbc25451fb6db/latest/GBP`
+      )
+      .then((response) => {
+        let toDefault = Object.keys(response.data.conversion_rates)[44];
+        setCurrencies(Object.keys(response.data.conversion_rates));
+        setFromCurrency(response.data.base_code);
+        setToCurrency(toDefault);
+        setExchangeRate(response.data.conversion_rates[toDefault]);
+      });
   }, []);
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    alert(`Converting...`);
+  useEffect(() => {
+    if (fromCurrency != null && toCurrency != null) {
+      axios
+        .get(
+          `https://v6.exchangerate-api.com/v6/3ceed1dda48fbc25451fb6db/latest/${fromCurrency}`
+        )
+        .then((response) => {
+          setExchangeRate(response.data.conversion_rates[toCurrency]);
+        });
+    }
+  }, [fromCurrency, toCurrency]);
+
+  function handleAmountChange(event) {
+    setAmount(event.target.value);
   }
 
+  let toAmount = amount * exchangeRate;
+
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit="handleSubmit">
       <label>
         Amount:
         <br />
@@ -30,20 +53,34 @@ export default function CurrencyInput() {
           className="CurrencyInput"
           autoComplete="off"
           autoFocus="off"
-          placeholder="100"
           required
+          value={amount}
+          onChange={handleAmountChange}
         />
       </label>
       <br />
-      <label className="Currency">
-        Select a currency to convert <strong>from</strong>:
-        <CurrencySelect countries={countries} />
-      </label>
-      <div className="Switch">↑↓</div>
-      <label className="Currency">
-        Select a currency to convert <strong>to</strong>:
-        <CurrencySelect countries={countries} />
-      </label>
+      <div className="CurrencySelectors">
+        <label className="Currency">
+          <strong>From</strong>:
+          <CurrencySelect
+            currencies={currencies}
+            chosenCurrency={fromCurrency}
+            onChangeCurrency={(e) => setFromCurrency(e.target.value)}
+          />
+        </label>
+        <div className="Switch">↑↓</div>
+        <label className="Currency">
+          <strong>To</strong>:
+          <CurrencySelect
+            currencies={currencies}
+            chosenCurrency={toCurrency}
+            onChangeCurrency={(e) => setToCurrency(e.target.value)}
+          />
+        </label>
+      </div>
+      <div className="Output">
+        {amount} {fromCurrency} = {toAmount} {toCurrency}
+      </div>
       <input type="submit" value="Convert" className="ConvertButton" />
     </form>
   );
