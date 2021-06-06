@@ -1,8 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "./App.css";
 import CurrencySelect from "./CurrencySelect";
 
 export default function CurrencyInput() {
+  let [countries, setCountries] = useState([]);
+
+  useEffect(() => {
+    axios({
+      method: "GET",
+      url: `https://openexchangerates.org/api/currencies.json`,
+    }).then((response) => {
+      setCountries(Object.entries(response.data));
+    });
+  }, []);
+
   function handleSubmit(event) {
     event.preventDefault();
     alert(`Converting...`);
@@ -25,12 +37,12 @@ export default function CurrencyInput() {
       <br />
       <label className="Currency">
         Select a currency to convert <strong>from</strong>:
-        <CurrencySelect />
+        <CurrencySelect countries={countries} />
       </label>
-      <br />
+      <div className="Switch">↑↓</div>
       <label className="Currency">
         Select a currency to convert <strong>to</strong>:
-        <CurrencySelect />
+        <CurrencySelect countries={countries} />
       </label>
       <input type="submit" value="Convert" className="ConvertButton" />
     </form>

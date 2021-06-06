@@ -4,7 +4,7 @@ select {
 }
 
 .App {
-  width: 600px;
+  max-width: 40%;
   margin: 20px auto;
   font-size: 14px;
   padding: 30px;
@@ -38,4 +38,11 @@ select {
 
 .Dropdown {
   margin-left: 10px;
+}
+
+.Switch {
+  font-size: 22px;
+  text-align: center;
+  padding: 5px 0px 20px 0px;
+  cursor: pointer;
 }
