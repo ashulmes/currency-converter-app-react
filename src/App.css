@@ -30,6 +30,15 @@ select {
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
 }
 
+.Countdown {
+  font-size: 14px;
+  border: 1px solid #046ab8;
+  width: 40%;
+  margin: 15px auto;
+  display: block;
+  padding: 2px;
+}
+
 .Currency {
   padding: 5px 0px;
 }

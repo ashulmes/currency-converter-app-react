@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./App.css";
 import CurrencySelect from "./CurrencySelect";
+import CurrencyResult from "./CurrencyResult";
 
 export default function CurrencyInput() {
   let [currencies, setCurrencies] = useState([]);
   let [fromCurrency, setFromCurrency] = useState();
   let [toCurrency, setToCurrency] = useState();
   let [amount, setAmount] = useState(0);
+  let [submitted, setSubmitted] = useState(false);
   let [fromCurrencyAmount, setFromCurrencyAmount] = useState(true);
   let [exchangeRate, setExchangeRate] = useState();
 
@@ -37,14 +39,21 @@ export default function CurrencyInput() {
     }
   }, [fromCurrency, toCurrency]);
 
+  useEffect(() => {
+    setSubmitted(false);
+  }, []);
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    setSubmitted(true);
+  }
+
   function handleAmountChange(event) {
     setAmount(event.target.value);
   }
 
-  let toAmount = amount * exchangeRate;
-
   return (
-    <form onSubmit="handleSubmit">
+    <form onSubmit={handleSubmit}>
       <label>
         Amount:
         <br />
@@ -68,7 +77,9 @@ export default function CurrencyInput() {
             onChangeCurrency={(e) => setFromCurrency(e.target.value)}
           />
         </label>
-        <div className="Switch">↑↓</div>
+        <div className="Switch">
+          <a href="#">↑↓</a>
+        </div>
         <label className="Currency">
           <strong>To</strong>:
           <CurrencySelect
@@ -78,9 +89,13 @@ export default function CurrencyInput() {
           />
         </label>
       </div>
-      <div className="Output">
-        {amount} {fromCurrency} = {toAmount} {toCurrency}
-      </div>
+      <CurrencyResult
+        amount={amount}
+        fromCurrency={fromCurrency}
+        toCurrency={toCurrency}
+        exchangeRate={exchangeRate}
+        submitted={submitted}
+      />
       <input type="submit" value="Convert" className="ConvertButton" />
     </form>
   );
