@@ -1,10 +1,13 @@
 select {
-  width: 200px;
   border: 1px solid #046ab8;
 }
 
+.AmountSearch {
+  text-align: center;
+}
+
 .App {
-  max-width: 30%;
+  max-width: 20%;
   margin: 20px auto;
   font-size: 14px;
   padding: 30px;
@@ -14,7 +17,7 @@ select {
 }
 
 .ConvertButton {
-  width: 400px;
+  width: 100%;
   border-radius: 30px;
   padding: 8px 0;
   display: block;
@@ -30,25 +33,8 @@ select {
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
 }
 
-.Countdown {
-  font-size: 14px;
-  border: 1px solid #046ab8;
-  width: 40%;
-  margin: 15px auto;
-  display: block;
-  padding: 2px;
-}
-
 .Currency {
   padding: 5px 0px;
-}
-
-.CurrencyInput {
-  border: 0px;
-  border-bottom: 1px solid #046ab8;
-  width: 400px;
-  padding: 10px 0px;
-  margin-bottom: 10px;
 }
 
 .CurrencySelectors {
@@ -57,17 +43,24 @@ select {
 
 .Dropdown {
   margin-left: 10px;
+  width: 100%;
+}
+
+.Result {
+  color: #046ab8;
 }
 
 .Output {
   text-align: center;
-  margin-top: 20px;
-  font-size: 22px;
+  margin-top: 30px;
+  font-size: 18px;
 }
 
-.Switch {
-  font-size: 22px;
-  text-align: center;
-  padding: 5px 0px 20px 0px;
-  cursor: pointer;
+.SearchField {
+  border: 0px;
+  border-bottom: 1px solid #046ab8;
+  padding: 10px 0px;
+  margin-bottom: 10px;
+  outline: none;
+  max-width: 80%;
 }

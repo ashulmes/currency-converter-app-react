@@ -28,7 +28,7 @@ export default function CurrencyInput() {
   }, []);
 
   useEffect(() => {
-    if (fromCurrency != null && toCurrency != null) {
+    if (submitted) {
       axios
         .get(
           `https://v6.exchangerate-api.com/v6/3ceed1dda48fbc25451fb6db/latest/${fromCurrency}`
@@ -53,50 +53,59 @@ export default function CurrencyInput() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Amount:
-        <br />
-        <input
-          type="number"
-          className="CurrencyInput"
-          autoComplete="off"
-          autoFocus="off"
-          required
-          value={amount}
-          onChange={handleAmountChange}
-        />
-      </label>
-      <br />
-      <div className="CurrencySelectors">
-        <label className="Currency">
-          <strong>From</strong>:
-          <CurrencySelect
-            currencies={currencies}
-            chosenCurrency={fromCurrency}
-            onChangeCurrency={(e) => setFromCurrency(e.target.value)}
-          />
-        </label>
-        <div className="Switch">
-          <a href="#">↑↓</a>
+    <container>
+      <form onSubmit={handleSubmit}>
+        <div className="AmountSearch">
+          <label>
+            Amount:
+            <br />
+            <input
+              type="number"
+              aria-label="search"
+              className="SearchField"
+              autoComplete="off"
+              autoFocus="off"
+              required
+              value={amount}
+              onChange={handleAmountChange}
+            />
+          </label>
         </div>
-        <label className="Currency">
-          <strong>To</strong>:
-          <CurrencySelect
-            currencies={currencies}
-            chosenCurrency={toCurrency}
-            onChangeCurrency={(e) => setToCurrency(e.target.value)}
-          />
-        </label>
-      </div>
-      <CurrencyResult
-        amount={amount}
-        fromCurrency={fromCurrency}
-        toCurrency={toCurrency}
-        exchangeRate={exchangeRate}
-        submitted={submitted}
-      />
-      <input type="submit" value="Convert" className="ConvertButton" />
-    </form>
+        <br />
+
+        <div className="CurrencySelectors">
+          <label className="Currency">
+            <strong>From</strong>:
+            <CurrencySelect
+              currencies={currencies}
+              chosenCurrency={fromCurrency}
+              onChangeCurrency={(e) => setFromCurrency(e.target.value)}
+            />
+          </label>
+          <br />
+          <label className="Currency">
+            <strong>To</strong>:
+            <CurrencySelect
+              currencies={currencies}
+              chosenCurrency={toCurrency}
+              onChangeCurrency={(e) => setToCurrency(e.target.value)}
+            />
+          </label>
+        </div>
+        <CurrencyResult
+          amount={amount}
+          fromCurrency={fromCurrency}
+          toCurrency={toCurrency}
+          exchangeRate={exchangeRate}
+          submitted={submitted}
+        />
+        <input
+          type="submit"
+          value="Convert"
+          className="ConvertButton"
+          aria-label="submit button"
+        />
+      </form>
+    </container>
   );
 }
