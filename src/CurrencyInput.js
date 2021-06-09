@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./App.css";
 import CurrencySelect from "./CurrencySelect";
 import CurrencyResult from "./CurrencyResult";
 
@@ -10,7 +9,6 @@ export default function CurrencyInput() {
   let [toCurrency, setToCurrency] = useState();
   let [amount, setAmount] = useState(0);
   let [submitted, setSubmitted] = useState(false);
-  let [fromCurrencyAmount, setFromCurrencyAmount] = useState(true);
   let [exchangeRate, setExchangeRate] = useState();
 
   useEffect(() => {
@@ -53,59 +51,59 @@ export default function CurrencyInput() {
   }
 
   return (
-    <container>
-      <form onSubmit={handleSubmit}>
-        <div className="AmountSearch">
-          <label>
-            Amount:
-            <br />
-            <input
-              type="number"
-              aria-label="search"
-              className="SearchField"
-              autoComplete="off"
-              autoFocus="off"
-              required
-              value={amount}
-              onChange={handleAmountChange}
-            />
-          </label>
-        </div>
-        <br />
-
-        <div className="CurrencySelectors">
-          <label className="Currency">
-            <strong>From</strong>:
-            <CurrencySelect
-              currencies={currencies}
-              chosenCurrency={fromCurrency}
-              onChangeCurrency={(e) => setFromCurrency(e.target.value)}
-            />
-          </label>
+    <form onSubmit={handleSubmit} title="searchForm">
+      <div className="AmountSearch">
+        <label>
+          Amount:
           <br />
-          <label className="Currency">
-            <strong>To</strong>:
-            <CurrencySelect
-              currencies={currencies}
-              chosenCurrency={toCurrency}
-              onChangeCurrency={(e) => setToCurrency(e.target.value)}
-            />
-          </label>
-        </div>
-        <CurrencyResult
-          amount={amount}
-          fromCurrency={fromCurrency}
-          toCurrency={toCurrency}
-          exchangeRate={exchangeRate}
-          submitted={submitted}
-        />
-        <input
-          type="submit"
-          value="Convert"
-          className="ConvertButton"
-          aria-label="submit button"
-        />
-      </form>
-    </container>
+          <input
+            type="number"
+            aria-label="search"
+            className="SearchField"
+            autoComplete="off"
+            autoFocus="off"
+            required
+            value={amount}
+            onChange={handleAmountChange}
+            title="searchBar"
+          />
+        </label>
+      </div>
+      <br />
+
+      <div className="CurrencySelectors">
+        <label className="Currency">
+          <strong>From</strong>:
+          <CurrencySelect
+            currencies={currencies}
+            chosenCurrency={fromCurrency}
+            onChangeCurrency={(e) => setFromCurrency(e.target.value)}
+          />
+        </label>
+        <br />
+        <label className="Currency">
+          <strong>To</strong>:
+          <CurrencySelect
+            currencies={currencies}
+            chosenCurrency={toCurrency}
+            onChangeCurrency={(e) => setToCurrency(e.target.value)}
+          />
+        </label>
+      </div>
+      <CurrencyResult
+        amount={amount}
+        fromCurrency={fromCurrency}
+        toCurrency={toCurrency}
+        exchangeRate={exchangeRate}
+        submitted={submitted}
+      />
+      <input
+        type="submit"
+        value="Convert"
+        className="ConvertButton"
+        aria-label="submit button"
+        title="submitButton"
+      />
+    </form>
   );
 }
