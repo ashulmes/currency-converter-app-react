@@ -48,47 +48,56 @@ export default function CurrencyInput() {
 
   function handleAmountChange(event) {
     setAmount(event.target.value);
+    setSubmitted(false);
+  }
+
+  function handleFromCurrencyChange(event) {
+    setFromCurrency(event.target.value);
+    setSubmitted(false);
+  }
+
+  function handleToCurrencyChange(event) {
+    setToCurrency(event.target.value);
+    setSubmitted(false);
   }
 
   return (
     <form onSubmit={handleSubmit} title="searchForm">
       <div className="AmountSearch">
-        <label>
-          Amount:
-          <br />
-          <input
-            type="number"
-            aria-label="search"
-            className="SearchField"
-            autoComplete="off"
-            autoFocus="off"
-            required
-            value={amount}
-            onChange={handleAmountChange}
-            title="searchBar"
-          />
-        </label>
+        <label>Amount:</label>
+        <br />
+        <input
+          type="number"
+          aria-label="search"
+          className="SearchField"
+          autoComplete="off"
+          autoFocus="off"
+          required
+          value={amount}
+          onChange={handleAmountChange}
+          title="searchBar"
+        />
       </div>
       <br />
 
       <div className="CurrencySelectors">
         <label className="Currency">
           <strong>From</strong>:
-          <CurrencySelect
-            currencies={currencies}
-            chosenCurrency={fromCurrency}
-            onChangeCurrency={(e) => setFromCurrency(e.target.value)}
-          />
         </label>
+        <CurrencySelect
+          currencies={currencies}
+          chosenCurrency={fromCurrency}
+          onChangeCurrency={handleFromCurrencyChange}
+        />
         <br />
         <label className="Currency">
           <strong>To</strong>:
-          <CurrencySelect
-            currencies={currencies}
-            chosenCurrency={toCurrency}
-            onChangeCurrency={(e) => setToCurrency(e.target.value)}
-          />
         </label>
+        <CurrencySelect
+          currencies={currencies}
+          chosenCurrency={toCurrency}
+          onChangeCurrency={handleToCurrencyChange}
+        />
       </div>
       <CurrencyResult
         amount={amount}
