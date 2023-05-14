@@ -7,13 +7,10 @@ export default function CurrencyResult(props) {
   if (submitted) {
     return (
       <div className="Output">
-        {amount} {fromCurrency} ={" "}
-        <span className="Result">
-          {Math.round(toAmount)} {toCurrency}
-        </span>
+        <span className="Result">{Math.round(toAmount)}</span>
       </div>
     );
   } else {
-    return null;
+    return <div className="Output"></div>;
   }
 }
